@@ -31,7 +31,6 @@ O sistema atuará como um motor de busca inteligente para licitações públicas
 - Busca por estado (UF)
 - Segmentação personalizada
 - Alertas automáticos
-- Monitoramento de prazos
 - Organização das oportunidades encontradas
 
 ---
@@ -45,25 +44,11 @@ Este repositório será utilizado para versionamento da documentação técnica 
 | Pasta | Descrição |
 |---|---|
 | `docs/visao` | Documento de visão do projeto |
-| `docs/requisitos` | Requisitos funcionais e não funcionais |
+| `docs/requisitos` | Requisitos funcionais e não funcionais|
 | `docs/uml` | Diagramas UML |
 | `docs/arquitetura` | Diagramas arquiteturais e componentes |
 | `docs/adr` | Architecture Decision Records |
 | `docs/implementacao` | Decisões e detalhes técnicos da implementação |
-
----
-
-## 📚 Diagramas
-
-O projeto utilizará os seguintes diagramas:
-
-- Casos de Uso
-- Classes
-- Sequência
-- Atividades
-- Componentes
-- Implantação
-- C4 Model
 
 ---
 
@@ -93,7 +78,6 @@ Exemplos:
 
 ### Ferramentas
 - Git & GitHub
-- Draw.io
 - PlantUML
 - Figma
 
@@ -128,7 +112,6 @@ Este projeto tem como objetivo aplicar conceitos de:
 - UML
 - Versionamento
 - Documentação Técnica
-- Boas práticas de desenvolvimento
 
 ---
 
