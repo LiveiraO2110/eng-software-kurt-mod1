@@ -45,7 +45,6 @@ Este repositório será utilizado para versionamento da documentação técnica 
 |---|---|
 | `docs/visao` | Documento de visão do projeto |
 | `docs/requisitos` | Requisitos funcionais e não funcionais|
-| `docs/uml` | Diagramas UML |
 | `docs/arquitetura` | Diagramas arquiteturais e componentes |
 | `docs/adr` | Architecture Decision Records |
 | `docs/implementacao` | Decisões e detalhes técnicos da implementação |
@@ -55,13 +54,6 @@ Este repositório será utilizado para versionamento da documentação técnica 
 ## 🧠 ADR — Architecture Decision Records
 
 As decisões arquiteturais serão registradas utilizando ADRs.
-
-Exemplos:
-
-- Escolha do Spring Boot
-- Utilização da API do PNCP
-- Estratégia de autenticação
-- Estrutura frontend/backend
 
 ---
 
@@ -74,7 +66,7 @@ Exemplos:
 
 ### Frontend
 - React
-- TypeScript
+- JavaScript
 
 ### Ferramentas
 - Git & GitHub
