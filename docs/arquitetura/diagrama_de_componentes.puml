@@ -1,0 +1,52 @@
+@startuml
+
+skinparam componentStyle rectangle
+skinparam backgroundColor white
+
+package "Frontend (React)" {
+
+    [Dashboard]
+    [BuscaEdital]
+    [AlertasView]
+}
+
+package "Backend (Spring Boot)" {
+
+    package "Controllers" {
+        [EditalController]
+        [AlertaController]
+        [AuthController]
+    }
+
+    package "Services" {
+        [EditalService]
+        [AlertaService]
+        [IndexacaoService]
+    }
+
+    package "Repositories" {
+        [EditalRepository]
+        [UsuarioRepository]
+    }
+}
+
+database "PostgreSQL" as DB
+
+[APIPNCP] <<external>>
+
+Dashboard --> EditalController : REST
+BuscaEdital --> EditalController : REST
+AlertasView --> AlertaController : REST
+
+EditalController --> EditalService
+AlertaController --> AlertaService
+
+EditalService --> EditalRepository
+AlertaService --> UsuarioRepository
+
+IndexacaoService --> APIPNCP : API REST
+
+EditalRepository --> DB
+UsuarioRepository --> DB
+
+@enduml
