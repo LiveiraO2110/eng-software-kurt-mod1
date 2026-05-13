@@ -13,40 +13,49 @@ package "Frontend (React)" {
 package "Backend (Spring Boot)" {
 
     package "Controllers" {
-        [EditalController]
-        [AlertaController]
+        [ClientesController]
+        [PropostasController]
         [AuthController]
     }
 
     package "Services" {
-        [EditalService]
-        [AlertaService]
-        [IndexacaoService]
+        [PropostasService]
+        [ClientesService]
+        [DailySearch]
+        [DocumentoService]
     }
 
     package "Repositories" {
-        [EditalRepository]
-        [UsuarioRepository]
+        [PropostasRepository]
+        [ClienteRepository]
     }
 }
 
 database "PostgreSQL" as DB
 
+cloud "Storage PDFs" as Storage
+
 [APIPNCP] <<external>>
 
-Dashboard --> EditalController : REST
-BuscaEdital --> EditalController : REST
-AlertasView --> AlertaController : REST
+Dashboard --> PropostasController : REST
+BuscaEdital --> PropostasController : REST
+AlertasView --> ClientesController : REST
 
-EditalController --> EditalService
-AlertaController --> AlertaService
+PropostasController --> PropostasService
+ClientesController --> ClientesService
 
-EditalService --> EditalRepository
-AlertaService --> UsuarioRepository
+ClientesService --> ClienteRepository
+PropostasService --> PropostasRepository
 
-IndexacaoService --> APIPNCP : API REST
+DailySearch --> PropostasRepository
 
-EditalRepository --> DB
-UsuarioRepository --> DB
+PropostasService --> APIPNCP : API REST
+DailySearch --> APIPNCP : API REST
+
+DocumentoService --> Storage
+PropostasService --> DocumentoService
+
+PropostasRepository --> DB
+ClienteRepository --> DB
 
 @enduml
