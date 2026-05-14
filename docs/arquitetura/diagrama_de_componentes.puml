@@ -65,9 +65,13 @@ database "PostgreSQL" as DB
 
 [APIPNCP] <<external>>
 
-Dashboard --> PropostasController : REST
-BuscaEdital --> PropostasController : REST
-AlertasView --> ClientesController : REST
+' Frontend → Controllers
+CadastroCliente    --> ClientesController   : REST
+ListagemPropostas  --> PropostasController  : REST
+PropostasSalvas    --> PropostasController  : REST (GET favoritos)
+ListagemPropostas  --> PropostasController  : REST (POST salvar)
+Dashboard          --> PropostasController  : REST
+AuthLogin          --> AuthController       : REST
 
 PropostasController --> PropostasService
 ClientesController --> ClientesService
