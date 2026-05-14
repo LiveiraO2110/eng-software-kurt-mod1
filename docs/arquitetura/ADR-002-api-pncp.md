@@ -1,6 +1,6 @@
 # ADR-002 Estratégia de Consumo da API do PNCP
 - Status: ACEITO 
-- Data: 2026-05-14 
+- Data: 2026-05-13
 - Equipe: Módulo 1
 
 ## Contexto
