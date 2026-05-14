@@ -12,17 +12,12 @@ A API pública do [PNCP](https://pncp.gov.br/api/consulta?utm_source=chatgpt.com
 - editais;
 - avisos de contratação;
 - órgãos públicos;
-- modalidades de licitação;
 - datas e valores de processos.
 
 Durante a análise inicial foram identificadas limitações operacionais da API, como:
 
 - indisponibilidade temporária;
 - lentidão em horários de pico;
-- inconsistência eventual em respostas;
-- ausência de garantias de alta disponibilidade.
-
-Essas características impactam diretamente a confiabilidade do sistema, exigindo a definição de mecanismos de tolerância a falhas e estratégias de resiliência arquitetural.
 
 ---
 
@@ -47,29 +42,7 @@ Quando a API estiver indisponível:
 
 ---
 
-# Alternativas Consideradas
-## 1. Replicar completamente os dados do PNCP em banco próprio
-
-### Vantagens
-
-- independência da API em tempo real;
-- consultas mais rápidas;
-- maior controle sobre os dados.
-
-### Desvantagens
-
-- necessidade de sincronização contínua;
-- maior consumo de armazenamento;
-- alta complexidade de implementação;
-- risco de dados desatualizados.
-
-Resultado:
-
-> descartada por exceder o escopo acadêmico do projeto.
-
----
-
-## 2. Utilizar cache
+## 1. Utilizar cache
 
 ### Vantagens
 
@@ -89,7 +62,7 @@ Resultado:
 
 ---
 
-## 3. Consultar a API diretamente
+## 2. Consultar a API diretamente
 
 ### Vantagens
 
@@ -114,11 +87,10 @@ Resultado:
 
 ### Positivas
 
-- implementação mais simples e rápida;
-- menor complexidade arquitetural;
+- implementação mais simples;
+- menor complexidade;
 - menor tempo de desenvolvimento e manutenção;
 - integração direta com dados oficiais do [PNCP](https://pncp.gov.br/api/consulta?utm_source=chatgpt.com);
-- redução da necessidade de infraestrutura adicional.
 
 ---
 
