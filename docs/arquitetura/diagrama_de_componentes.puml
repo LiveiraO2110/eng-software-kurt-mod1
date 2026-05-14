@@ -3,11 +3,39 @@
 skinparam componentStyle rectangle
 skinparam backgroundColor white
 
+@startuml
+skinparam componentStyle rectangle
+skinparam backgroundColor white
+
 package "Frontend (React)" {
 
+  package "Telas principais" {
+    [CadastroCliente] <<screen>>
+    note right of [CadastroCliente]
+      Formulário com critérios
+      de busca no PNCP
+      (segmento, valor, UF, palavras-chave)
+    end note
+
+    [ListagemPropostas] <<screen>>
+    note right of [ListagemPropostas]
+      Cards de editais encontrados
+      com botão "⭐ Salvar proposta"
+      e filtros dinâmicos
+    end note
+
+    [PropostasSalvas] <<screen>>
+    note right of [PropostasSalvas]
+      Favoritos do usuário
+      com detalhes e documentos
+    end note
+  }
+
+  package "Componentes de suporte" {
     [Dashboard]
-    [BuscaEdital]
     [AlertasView]
+    [FiltrosBusca]
+  }
 }
 
 package "Backend (Spring Boot)" {
