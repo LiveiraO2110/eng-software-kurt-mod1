@@ -49,11 +49,8 @@ CadastroCliente    --> ClientesController   : REST
 ListagemPropostas  --> PropostasController  : REST
 PropostasSalvas    --> PropostasController  : REST 
 ListagemPropostas  --> PropostasController  : REST 
-Dashboard          --> PropostasController  : REST
-AuthLogin          --> AuthController       : REST
-Dashboard          --> EditalController     : REST
-AlterarFiltrosBusca       --> ClientesController   : REST
-
+AlterarFiltrosBusca      --> ClientesController   : REST
+PropostasSalvas    --> EditalController
 
 PropostasController --> PropostasService
 ClientesController --> ClientesService
