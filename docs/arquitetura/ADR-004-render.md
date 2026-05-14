@@ -42,4 +42,4 @@ A configuração utilizará:
 - **Cold Starts (Hibernação):** No plano gratuito, os serviços web do Render "dormem" após 15 minutos de inatividade. O primeiro acesso após esse período pode levar até 1 minuto para carregar (impactando temporariamente a experiência do usuário/avaliador).
 - **Limitação de Duração do Banco de Dados:** O PostgreSQL gratuito do Render expira após 90 dias. A equipe aceita esse trade-off pois o período é suficiente para a apresentação e avaliação do MVP acadêmico do semestre.
 - **Recursos Limitados:** Memória RAM e CPU reduzidas, o que limita a escalabilidade, mas é perfeitamente adequado para o volume de dados de um protótipo.
-Links relacionados: docs/arquitetura/diagrama_de_implementacao.puml
+- Links relacionados: docs/arquitetura/diagrama_de_implementacao.puml
