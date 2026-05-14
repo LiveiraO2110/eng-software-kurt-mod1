@@ -15,6 +15,7 @@ package "Backend (Spring Boot)" {
     package "Controllers" {
         [ClientesController]
         [PropostasController]
+        [EditalController]
         [AuthController]
     }
 
@@ -22,18 +23,17 @@ package "Backend (Spring Boot)" {
         [PropostasService]
         [ClientesService]
         [DailySearch]
-        [DocumentoService]
+        [EditalService]
     }
 
     package "Repositories" {
         [PropostasRepository]
         [ClienteRepository]
+        [EditalRepository]
     }
 }
 
 database "PostgreSQL" as DB
-
-cloud "Storage PDFs" as Storage
 
 [APIPNCP] <<external>>
 
@@ -43,19 +43,19 @@ AlertasView --> ClientesController : REST
 
 PropostasController --> PropostasService
 ClientesController --> ClientesService
+EditalController --> EditalService
 
 ClientesService --> ClienteRepository
 PropostasService --> PropostasRepository
+EditalService --> EditalRepository
 
 DailySearch --> PropostasRepository
 
 PropostasService --> APIPNCP : API REST
 DailySearch --> APIPNCP : API REST
 
-DocumentoService --> Storage
-PropostasService --> DocumentoService
-
 PropostasRepository --> DB
 ClienteRepository --> DB
+EditalRepository --> DB
 
 @enduml
