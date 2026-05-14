@@ -4,14 +4,14 @@
 - Equipe: Módulo 1
 
 ## Contexto  
-Projeto acadêmico com a finalidade de criação de uma plataforma, onde o Módulo 1 seria responsável pela busca e indexação de editais divulgados diáriamente pela PNCP
+Um dos principais requisitos é a interface fazer a busca diária das proposta na PNCP
 
 Restrições identificadas:
-- Equipe sem uma tecnologia/framework em comum
+- 
 -
 
 ## Alternativas Consideradas 
-1. MVC - descartado: 
+1. Usuário acionar a busca diariamente - descartado: 
 2. Microserviços — descartado: muito complexo e desnecessário para essa atividade
 
 
