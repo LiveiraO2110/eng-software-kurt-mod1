@@ -1,0 +1,43 @@
+@startuml Deploy_Prospeccao
+
+skinparam backgroundColor white
+left to right direction
+
+node "Usuário" as User <<device>>
+
+node "Frontend (React)" as Frontend <<hosting>> {
+    artifact "React SPA"
+}
+
+cloud "AWS Infrastructure" as AWS {
+
+    node "EC2 Instance" as EC2 {
+
+        node "Spring Boot Backend" as Spring <<container>> {
+            artifact "REST API"
+            artifact "DailySearch Scheduler"
+        }
+
+    }
+
+    cloud "Amazon S3" as Storage {
+        artifact "PDFs dos Editais"
+    }
+}
+
+node "Supabase" as Supabase {
+    database "PostgreSQL" as PostgreSQL
+}
+
+cloud "API PNCP" as PNCP <<external>>
+
+User --> Frontend : HTTPS
+
+Frontend --> Spring : HTTPS/JSON
+
+Spring --> PostgreSQL : JDBC
+Spring --> Storage : Upload/Download PDFs
+
+Spring --> PNCP : REST API
+
+@enduml
