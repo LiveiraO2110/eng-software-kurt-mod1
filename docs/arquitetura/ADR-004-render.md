@@ -1,4 +1,4 @@
-# ADR-004: Escolha da Plataforma de Hospedagem (Render)
+# ADR-004: Escolha da Plataforma de Hospedagem (Render) vs (AWS)
 - Status: ACEITO 
 - Data: 2026-05-14 
 - Equipe: Módulo 1
