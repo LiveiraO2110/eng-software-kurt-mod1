@@ -44,8 +44,7 @@ Este repositório será utilizado para versionamento da documentação técnica 
 | Pasta | Descrição |
 |---|---|
 | `docs/visao` | Documento de visão do projeto |
-| `docs/arquitetura` | Diagramas arquiteturais e componentes |
-| `docs/adr` | Architecture Decision Records |
+| `docs/arquitetura` | Diagramas arquiteturais e componentes, e Architecture Decision Records|
 
 ---
 
