@@ -22,4 +22,4 @@ Os Requisitos Funcionais descrevem as ações, comportamentos e funcionalidades 
 | **RF11**      | O sistema deve permitir que o utilizador autenticado marque editais como "Favoritos" para consulta rápida posterior.                                                                  | Importante |
 | **RF12**      | O sistema deve permitir filtrar os editais por uma faixa de valor estimado (definindo um valor mínimo e um valor máximo).                                                             | Importante |
 | **RF13**      | O sistema deve permitir que o utilizador salve múltiplos perfis de busca (combinações guardadas de palavras-chave, UF e faixa de valor).                                              | Desejável  |
-| **RF13**      | O sistema deve permitir que o utilizador descarte os editais que ele não tenha interesse                                                                                              | Essencial  |
+| **RF14**      | O sistema deve permitir que o utilizador descarte os editais que ele não tenha interesse                                                                                              | Essencial  |
