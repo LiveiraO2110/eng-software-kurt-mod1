@@ -36,7 +36,7 @@ public class SchedulerWorker {
         this.procurementService = procurementService;
     }
 
-//    @Scheduled(fixedDelay = 180000)
+    @Scheduled(fixedDelay = 180000)
     @Transactional
     public void customerSearchTerms(){
         List<SearchTerms> terms = searchTermsRepository.findAll();
