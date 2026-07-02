@@ -45,7 +45,13 @@ Este repositório será utilizado para versionamento da documentação técnica 
 |---|---|
 | `docs/visao` | Documento de visão do projeto |
 | `docs/arquitetura` | Diagramas arquiteturais e componentes |
-| `docs/adr` | Architecture Decision Records |
+| `docs/arquitetura` | Architecture Decision Records |
+| `docs/testes` | Casos de testes e Plano de testes |
+| `docs/software` | Aplicação Spring |
+| `docs/requisitos` | Requisitos Funcionais e Não-Funcionais |
+| `docs/especificacao/contratos-de-interface` | Contratos de Interace |
+| `docs/especificacao/diagrama-de-classes` | Diagrama de Classes |
+| `docs/especificacao/diagrama-de-sequencia` | Diagrama de Sequência |
 
 ---
 
