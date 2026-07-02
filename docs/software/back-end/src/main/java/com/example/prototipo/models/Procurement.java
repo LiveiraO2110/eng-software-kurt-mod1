@@ -1,0 +1,119 @@
+package com.example.prototipo.models;
+
+import com.example.prototipo.enums.Status;
+import com.example.prototipo.records.OpportunitiesPNCP;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+@Table(name = "editais", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"cliente_id", "pncpId"})
+})
+@Getter
+@Setter
+public class Procurement {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+
+    @Column(unique = true)
+    private String pncpId;
+
+    @Column(name = "descricao", columnDefinition = "TEXT", nullable = false)
+    private String description;
+
+    @Column(name = "cidade", nullable = false)
+    private String city;
+
+    @Column(name = "data_atualizacao", nullable = false)
+    private LocalDate updateDate;
+
+    @Column(name = "data_abertura", nullable = false)
+    private LocalDateTime openDate;
+
+    @Column(name = "data_fechamento", nullable = false)
+    private LocalDateTime closeDate;
+
+    @Column(name = "cnpj", nullable = false)
+    private String cnpj;
+
+    @Column(name = "nome", nullable = false)
+    private String name;
+
+    @Column(name = "modalidade", nullable = false)
+    private String modalidade;
+
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @Column(name = "numero_sequencial", nullable = false)
+    private String numeroSequencial;
+
+    @Column(name = "link", nullable = false)
+    private String link;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
+    private State state;
+
+    @OneToMany(mappedBy = "procurement")
+    private Set<Docs> docs;
+
+    public Procurement(){}
+
+    public Procurement(Customer customer, OpportunitiesPNCP opportunity, State state){
+        this.pncpId = opportunity.numero_controle_pncp();
+        this.description = opportunity.description();
+        this.city = opportunity.municipio_nome();
+        this.openDate = opportunity.data_inicio_vigencia();
+        this.closeDate = opportunity.data_fim_vigencia();
+        this.cnpj = opportunity.orgao_cnpj();
+        this.name = opportunity.orgao_nome();
+        this.modalidade = opportunity.modalidade_licitacao_nome();
+        this.numeroSequencial = opportunity.numero_sequencial();
+        this.customer = customer;
+        this.state = state;
+        this.status = Status.PENDENTE;
+        this.link = "https://pncp.gov.br/app/editais/"+opportunity.orgao_cnpj()+"/2026/"+opportunity.numero_sequencial();
+        this.updateDate = LocalDate.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Procurement{" +
+                ", pncpId='" + pncpId + '\'' +
+                ", description='" + description + '\'' +
+                ", city='" + city + '\'' +
+                ", openDate=" + openDate +
+                ", closeDate=" + closeDate +
+                ", cnpj='" + cnpj + '\'' +
+                ", name='" + name + '\'' +
+                ", uf='" + state.getUf() + '\'' +
+                ", modalidade='" + modalidade + '\'' +
+                ", validated=" + status.toString() +
+                ", customer=" + customer +
+                '}';
+    }
+
+    public void addDoc(Docs docs){
+        if(this.docs == null){
+            this.docs = new HashSet<>();
+        }
+
+        this.docs.add(docs);
+        docs.setProcurement(this);
+    }
+}
