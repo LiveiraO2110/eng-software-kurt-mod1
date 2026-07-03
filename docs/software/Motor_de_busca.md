@@ -68,7 +68,26 @@ Nenhum.
 
 ### Exemplo de Requisição
 
+POST | localhost:8080/auth/register
+
+``` json
+{
+  "name": "Diego Lopes",
+  "email": "diegolopes@gmail.com",
+  "password": "d13g0"
+}
+```
+
 ### Exemplo de Resposta
+
+Status: 201
+
+``` json
+{
+  "id": 1,
+  "name": "Diego Lopes"
+}
+```
 
 ------------------------------------------------------------------------
 
@@ -89,9 +108,27 @@ Nenhum.
 
 Nenhum.
 
+
 ### Exemplo de Requisição
 
+POST | localhost:8080/auth/login
+
+``` json
+{
+  "email": "diegolopes@gmail.com",
+  "password": "d13g0"
+}
+```
+
 ### Exemplo de Resposta
+
+Status: 200
+
+``` json
+{
+  "token": ij4b14b8y213y12bu3b21ug3b12yadad
+}
+```
 
 ------------------------------------------------------------------------
 
@@ -103,7 +140,7 @@ Nenhum.
 
 ``` json
 {
-  "userId": 1,
+  "userId": "number",
   "name": "string"
 }
 ```
@@ -114,7 +151,27 @@ Nenhum.
 
 ### Exemplo de Requisição
 
+POST | localhost:8080/customers
+
+``` json
+{
+  "userId": 1,
+  "name": Hélio Ferragens
+}
+```
+
 ### Exemplo de Resposta
+
+Status: 201
+
+``` json
+{
+  "id": 1,
+  "name": "Hélio Ferragens",
+  "searchTerms": [],
+  "procurements": 0
+}
+```
 
 ------------------------------------------------------------------------
 
@@ -133,7 +190,21 @@ Nenhum.
 
 ### Exemplo de Requisição
 
+GET | localhost:8080/customers
+
 ### Exemplo de Resposta
+
+
+``` json
+[
+  {
+    "id": 1,
+    "name": "Hélio Ferragens",
+    "searchTerms": [],
+    "procurements": 0
+  }
+]
+```
 
 ------------------------------------------------------------------------
 
@@ -153,7 +224,18 @@ Nenhum.
 
 ### Exemplo de Requisição
 
+GET | localhost:8080/customers
+
 ### Exemplo de Resposta
+
+``` json
+{
+  "id": 1,
+  "name": "Hélio Ferragens",
+  "searchTerms": [],
+  "procurements": 0
+}
+```
 
 ------------------------------------------------------------------------
 
@@ -165,8 +247,11 @@ Nenhum.
 
 ``` json
 {
-  "customerId": 1,
-  "terms": ["software","servidor","rede"]
+  "customerId": "number",
+  "terms": [
+    "term": "string",
+    "states": "string[]"
+  ]
 }
 ```
 
@@ -176,7 +261,33 @@ Nenhum.
 
 ### Exemplo de Requisição
 
+POST | localhost:8080/customers/search-terms
+
+``` json
+{
+  "customerId": 1,
+  "terms": [
+    {
+      "term": "ferragem",
+      "states": ["RS"] 
+    }
+  ]
+}
+```
+
 ### Exemplo de Resposta
+
+Status: 201
+
+``` json
+[
+  {
+    "id": 1,
+    "term": "ferragem",
+    "customerId": 1
+  }
+]
+```
 
 ------------------------------------------------------------------------
 
@@ -196,7 +307,21 @@ Nenhum.
 
 ### Exemplo de Requisição
 
+GET | localhost:8080/customers/1/search-terms
+
 ### Exemplo de Resposta
+
+Status: 200
+
+``` json
+[
+  {
+    "id": 1,
+    "term": "ferragem",
+    "customerId": 1
+  }
+]
+```
 
 ------------------------------------------------------------------------
 
@@ -216,7 +341,32 @@ Nenhum.
 
 ### Exemplo de Requisição
 
+GET | localhost:8080/customers/1/procurements
+
 ### Exemplo de Resposta
+
+Status: 200
+
+``` json
+[
+  {
+        "id": 1,
+        "pncpId": "78486198000152-1-000254/2026",
+        "customerId": 1,
+        "customer": "Hélio Ferragens",
+        "description": "Descrição sobre o edtial",
+        "city": "Santa Cruz do Sul",
+        "uf": "RS",
+        "insertDate": "2026-07-02",
+        "openDate": "2026-07-03T15:00:00",
+        "closeDate": "2026-07-22T07:45:00",
+        "cnpj": "78486198000152",
+        "name": "MUNICIPIO DE SANTA CRUZ DO SUL",
+        "modalidade": "Pregão - Eletrônico",
+        "link": "https://pncp.gov.br/app/editais/78486198000152/2026/254"
+    }
+]
+```
 
 ------------------------------------------------------------------------
 
@@ -234,7 +384,33 @@ Nenhum.
 
 ### Exemplo de Requisição
 
+GET | localhost:8080/procurements
+
 ### Exemplo de Resposta
+
+Status: 200
+
+``` json
+[
+  {
+        "id": 1,
+        "pncpId": "78486198000152-1-000254/2026",
+        "customerId": 1,
+        "customer": "Hélio Ferragens",
+        "status": "PENDENTE"
+        "description": "Descrição sobre o edtial",
+        "city": "Santa Cruz do Sul",
+        "uf": "RS",
+        "insertDate": "2026-07-02",
+        "openDate": "2026-07-03T15:00:00",
+        "closeDate": "2026-07-22T07:45:00",
+        "cnpj": "78486198000152",
+        "name": "MUNICIPIO DE SANTA CRUZ DO SUL",
+        "modalidade": "Pregão - Eletrônico",
+        "link": "https://pncp.gov.br/app/editais/78486198000152/2026/254"
+    }
+]
+```
 
 ------------------------------------------------------------------------
 
@@ -253,17 +429,43 @@ Nenhum.
   c      Long        Não           ID do cliente
   date   LocalDate   Sim           Data da pesquisa
   uf     String      Não           Estado
-  PNCP   String      Não           ID PNCP
+  pncp   String      Não           ID PNCP
 
 ### Exemplo de Requisição
 
+GET | localhost:8080/procurements/search?c=1&date=2026-07-02&uf=RS&pncp=784
+
 ### Exemplo de Resposta
+
+Status: 200
+
+``` json
+[
+  {
+        "id": 1,
+        "pncpId": "78486198000152-1-000254/2026",
+        "customerId": 1,
+        "customer": "Hélio Ferragens",
+        "status": "PENDENTE"
+        "description": "Descrição sobre o edtial",
+        "city": "Santa Cruz do Sul",
+        "uf": "RS",
+        "insertDate": "2026-07-02",
+        "openDate": "2026-07-03T15:00:00",
+        "closeDate": "2026-07-22T07:45:00",
+        "cnpj": "78486198000152",
+        "name": "MUNICIPIO DE SANTA CRUZ DO SUL",
+        "modalidade": "Pregão - Eletrônico",
+        "link": "https://pncp.gov.br/app/editais/78486198000152/2026/254"
+    }
+]
+```
 
 ------------------------------------------------------------------------
 
 # PUT `/procurements/{id}/status/{status}`
 
-**Descrição:** Altera o status do edital.
+**Descrição:** Altera o status do edital. (APROVADO, PENDENTE e DESCARTADO)
 
 ### Request Body
 
@@ -278,7 +480,11 @@ Nenhum.
 
 ### Exemplo de Requisição
 
+PUT | localhost:8080/procurements/1/DESCARTADO
+
 ### Exemplo de Resposta
+
+Status: 204
 
 ------------------------------------------------------------------------
 
@@ -296,4 +502,18 @@ Nenhum.
 
 ### Exemplo de Requisição
 
+DELETE | localhost:8080/procurements
+
 ### Exemplo de Resposta
+
+Status: 204
+
+# Spring Security
+
+Spring Security é uma dependência amplamente utilizada para adicionar autenticação e autorização a aplicações Spring Boot. Nesta aplicação, a segurança foi configurada no modelo STATELESS, ou seja, o servidor não mantém informações de sessão entre as requisições.
+
+Para identificar o usuário autenticado, é utilizado o JWT (JSON Web Token). Após realizar o login com sucesso, a API gera um token que deve ser enviado em todas as requisições protegidas por meio do cabeçalho Authorization, utilizando o esquema Bearer:
+
+Authorization: Bearer <token>
+
+A cada requisição, o Spring Security valida a assinatura e a validade do token. Caso ele seja válido, o usuário é autenticado e autorizado a acessar os recursos protegidos da aplicação. Como não há armazenamento de sessão no servidor, todas as informações necessárias para a autenticação são obtidas diretamente a partir do JWT enviado pelo cliente.
