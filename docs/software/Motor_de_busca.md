@@ -46,6 +46,16 @@ spring.datasource.password=sua_senha
 ./mvnw spring-boot:run
 ```
 
+# Spring Security
+
+Spring Security é uma dependência amplamente utilizada para adicionar autenticação e autorização a aplicações Spring Boot. Nesta aplicação, a segurança foi configurada no modelo STATELESS, ou seja, o servidor não mantém informações de sessão entre as requisições.
+
+Para identificar o usuário autenticado, é utilizado o JWT (JSON Web Token). Após realizar o login com sucesso, a API gera um token que deve ser enviado em todas as requisições protegidas por meio do cabeçalho Authorization, utilizando o esquema Bearer:
+
+Authorization: Bearer <token>
+
+A cada requisição, o Spring Security valida a assinatura e a validade do token. Caso ele seja válido, o usuário é autenticado e autorizado a acessar os recursos protegidos da aplicação. Como não há armazenamento de sessão no servidor, todas as informações necessárias para a autenticação são obtidas diretamente a partir do JWT enviado pelo cliente.
+
 # 📍 Endpoints Principais
 
 # POST `/auth/register`
@@ -507,13 +517,3 @@ DELETE | localhost:8080/procurements
 ### Exemplo de Resposta
 
 Status: 204
-
-# Spring Security
-
-Spring Security é uma dependência amplamente utilizada para adicionar autenticação e autorização a aplicações Spring Boot. Nesta aplicação, a segurança foi configurada no modelo STATELESS, ou seja, o servidor não mantém informações de sessão entre as requisições.
-
-Para identificar o usuário autenticado, é utilizado o JWT (JSON Web Token). Após realizar o login com sucesso, a API gera um token que deve ser enviado em todas as requisições protegidas por meio do cabeçalho Authorization, utilizando o esquema Bearer:
-
-Authorization: Bearer <token>
-
-A cada requisição, o Spring Security valida a assinatura e a validade do token. Caso ele seja válido, o usuário é autenticado e autorizado a acessar os recursos protegidos da aplicação. Como não há armazenamento de sessão no servidor, todas as informações necessárias para a autenticação são obtidas diretamente a partir do JWT enviado pelo cliente.
