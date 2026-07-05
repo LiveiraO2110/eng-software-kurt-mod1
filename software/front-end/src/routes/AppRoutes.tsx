@@ -4,6 +4,7 @@ import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { AuthContextProvider } from "../contexts/AuthContext/AuthContextProvider";
 import { AuthContextGuard } from "../contexts/AuthContext/AuthContextGuard";
 import { HomePage } from "../pages/HomePage/HomePage";
+import { ClientRegisterPage } from "../pages/ClientRegisterPage/ClientRegisterPage";
 
 export function AppRoutes(){
     return(
@@ -13,6 +14,7 @@ export function AppRoutes(){
                     <Route element={<AuthContextGuard/>}>
                         
                         <Route path={ROUTES.HOMEPAGE} element={<HomePage/>}/>
+                        <Route path={ROUTES.REGISTER_CLIENTE} element={<ClientRegisterPage/>}/>
                     </Route>
                     
                     <Route path={ROUTES.LOGIN} element={<LoginPage/>}/>

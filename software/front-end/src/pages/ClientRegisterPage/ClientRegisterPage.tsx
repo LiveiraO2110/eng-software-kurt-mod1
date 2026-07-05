@@ -1,8 +1,8 @@
 import { SideBarCustomers } from "../../components/SideBarCustomers"
 import { useAuthContext } from "../../contexts/AuthContext/useAuthContext"
-import "./HomePage.css"
+import "./ClientRegisterPage.css"
 
-export const HomePage = () => {
+export const ClientRegisterPage = () => {
     const { authData } = useAuthContext();
 
     return (
