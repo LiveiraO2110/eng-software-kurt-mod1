@@ -1,0 +1,125 @@
+.homepage {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8fafc;
+}
+
+.barra-lateral {
+    width: 280px;
+    background-color: #0f172a;
+    color: #94a3b8;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+    overflow-y: auto;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #3b82f6;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+}
+
+.user-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #f8fafc;
+    margin: 0;
+}
+
+.divisor {
+    border: 0;
+    height: 1px;
+    background-color: #334155;
+    margin: 10px 0;
+}
+
+.sidebar-section h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-bottom: 12px;
+    padding-left: 8px;
+}
+
+.barra-lateral-customers {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.barra-lateral-customers-item {
+    background-color: #1e293b;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.barra-lateral-customers-item:hover {
+    background-color: #334155;
+    border-color: #3b82f6;
+    transform: translateX(4px);
+}
+
+.customer-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #e2e8f0;
+    margin: 0;
+}
+
+.customer-badge {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+.customer-badge strong {
+    color: #3b82f6;
+}
+
+.status-msg {
+    font-size: 0.85rem;
+    color: #64748b;
+    padding-left: 8px;
+}
+
+.conteudo {
+    flex: 1;
+    padding: 30px;
+}
