@@ -36,13 +36,15 @@ public class SchedulerWorker {
         this.procurementService = procurementService;
     }
 
-    @Scheduled(fixedDelay = 180000)
+//    @Scheduled(fixedDelay = 180000)
     @Transactional
     public void customerSearchTerms(){
         List<SearchTerms> terms = searchTermsRepository.findAll();
 
         for (SearchTerms term : terms) {
-            List<OpportunitiesPNCP> procurements = dailySearch(term);
+            List<OpportunitiesPNCP> procurements = dailySearch(term).stream()
+                    .filter(p -> !term.getCustomer().getDiscardsPncpId().contains(p.numero_controle_pncp()))
+                    .toList();
 
             for (OpportunitiesPNCP procurement : procurements) {
 

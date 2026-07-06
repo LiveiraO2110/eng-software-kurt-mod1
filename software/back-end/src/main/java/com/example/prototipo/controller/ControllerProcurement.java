@@ -47,7 +47,7 @@ public class ControllerProcurement {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping()
+    @DeleteMapping
     public ResponseEntity<Void> deleteAllDiscard(){
         service.deleteAllDiscard();
         return ResponseEntity.noContent().build();

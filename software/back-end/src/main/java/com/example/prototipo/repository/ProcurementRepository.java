@@ -15,6 +15,16 @@ public interface ProcurementRepository extends JpaRepository<Procurement, Long> 
     @Query("SELECT p FROM Procurement p WHERE p.customer.id = :id AND p.status <> 'DESCARTADO'")
     List<Procurement> findByCustomer_Id(@Param("id") Long customerId);
 
+    List<Procurement> findByStatus(String status);
+
+    @Query("""
+        SELECT p
+        FROM Procurement p
+        JOIN FETCH p.customer
+        WHERE p.status = :status
+        """)
+    List<Procurement> findDiscardWithCustomer(String status);
+
     @Query("SELECT p FROM Procurement p WHERE p.customer.id = :id AND p.status = 'DESCARTADO'")
     List<Procurement> findOnlyDiscardByCustomer_Id(@Param("id") Long customerId);
 

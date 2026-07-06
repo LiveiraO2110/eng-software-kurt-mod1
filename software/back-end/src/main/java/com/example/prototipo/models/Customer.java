@@ -29,6 +29,9 @@ public class Customer {
     @OneToMany(mappedBy = "customer")
     private final Set<Procurement> procurements = new HashSet<>();
 
+    @ElementCollection
+    private Set<String> discardsPncpId = new HashSet<>();
+
     public Customer(){}
 
     public Customer(String name){
@@ -57,5 +60,13 @@ public class Customer {
     public void removeSearchTerm(SearchTerms terms){
         this.searchTerms.remove(terms);
         terms.setCustomer(null);
+    }
+
+    public void addPncpId(String pncp){
+        if(this.discardsPncpId == null){
+            this.discardsPncpId = new HashSet<>();
+        }
+
+        this.discardsPncpId.add(pncp);
     }
 }

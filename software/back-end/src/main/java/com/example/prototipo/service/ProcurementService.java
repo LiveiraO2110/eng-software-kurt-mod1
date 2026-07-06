@@ -10,6 +10,7 @@ import com.example.prototipo.records.OpportunitiesPNCP;
 import com.example.prototipo.repository.DocsRepository;
 import com.example.prototipo.repository.ProcurementRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ContentDisposition;
@@ -42,8 +43,13 @@ public class ProcurementService {
                 .orElseThrow(() -> new EntityNotFoundException("Edital não encotrado"));
     }
 
+    @Transactional
     public void deleteAllDiscard(){
-        repository.deleteAllDiscard();
+        List<Procurement> discard = repository.findDiscardWithCustomer(Status.DESCARTADO.toString());
+
+        discard.forEach(d -> d.getCustomer().addPncpId(d.getPncpId()));
+
+        repository.deleteAll(discard);
     }
 
     public void changeStatus(Long procurementId, Status status){
