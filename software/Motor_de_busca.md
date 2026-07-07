@@ -521,7 +521,7 @@ Status: 204
 
 ------------------------------------------------------------------------
 
-# DELETE `/search`
+# GET `/search`
 
 **Descrição:** Realiza a busca na API do PNCP
 
@@ -535,7 +535,7 @@ Nenhum.
 
 ### Exemplo de Requisição
 
-DELETE | localhost:8080/search
+GET | localhost:8080/search
 
 ### Exemplo de Resposta
 
@@ -563,3 +563,26 @@ Status: 204
   }
 ```
 
+------------------------------------------------------------------------
+
+# GET `/search/status`
+
+**Descrição:** Verfica se a busca esta ativa (true) ou não (false)
+
+### Request Body
+
+Nenhum.
+
+### Parâmetros
+
+Nenhum.
+
+### Exemplo de Requisição
+
+GET | localhost:8080/search/status
+
+### Exemplo de Resposta
+
+Status: 200
+
+true
