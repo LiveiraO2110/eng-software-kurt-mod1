@@ -517,3 +517,49 @@ DELETE | localhost:8080/procurements
 ### Exemplo de Resposta
 
 Status: 204
+
+
+------------------------------------------------------------------------
+
+# DELETE `/search`
+
+**Descrição:** Realiza a busca na API do PNCP
+
+### Request Body
+
+Nenhum.
+
+### Parâmetros
+
+Nenhum.
+
+### Exemplo de Requisição
+
+DELETE | localhost:8080/search
+
+### Exemplo de Resposta
+
+1 - Se a busca não estiver ocorrendo
+
+Status: 200
+
+``` json
+  {
+      "status": "BUSCANDO...",
+      "message": "A busca já está sendo realizada"
+  }
+```
+
+---
+
+2 - Se a busca estiver ocorrendo
+
+Status: 204
+
+``` json
+  {
+      "status": "BUSCA INICIADA",
+      "message": "A busca foi iniciada"
+  }
+```
+
