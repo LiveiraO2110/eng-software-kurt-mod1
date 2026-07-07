@@ -541,7 +541,7 @@ GET | localhost:8080/search
 
 1 - Se a busca não estiver ocorrendo
 
-Status: 200
+Status: 409
 
 ``` json
   {
@@ -554,7 +554,7 @@ Status: 200
 
 2 - Se a busca estiver ocorrendo
 
-Status: 204
+Status: 200
 
 ``` json
   {
