@@ -2,6 +2,7 @@ package com.example.prototipo.service;
 
 import com.example.prototipo.enums.Status;
 import com.example.prototipo.exception.BusinessException;
+import com.example.prototipo.models.Customer;
 import com.example.prototipo.models.Docs;
 import com.example.prototipo.models.Procurement;
 import com.example.prototipo.records.DailyResponse;
@@ -24,6 +25,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ProcurementService {
@@ -68,8 +70,25 @@ public class ProcurementService {
         return repository.searchProcurements(date, customerId, uf, pncpId);
     }
 
+    @Transactional
+    public void save(Procurement procurement){
+        try{
+            if(procurement.getCustomer() != null){
+                Set<String> discards = procurement.getCustomer().getDiscardsPncpId();
+
+                if (discards == null || !discards.contains(procurement.getPncpId())){
+                    repository.save(procurement);
+                }
+            }
+        } catch (Exception exception){
+            return;
+        }
+    }
+
     public List<OpportunitiesPNCP> searchByPage(String q, String ufs, int page){
         System.out.println("Fazendo requisição: "+q);
+        System.out.println(q);
+        System.out.println(ufs);
 
         try{
             DailyResponse response = restClient

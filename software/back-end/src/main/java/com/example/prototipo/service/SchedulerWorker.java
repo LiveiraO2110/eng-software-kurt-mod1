@@ -1,21 +1,21 @@
 package com.example.prototipo.service;
 
+import com.example.prototipo.exception.BusinessException;
 import com.example.prototipo.models.Procurement;
 import com.example.prototipo.models.SearchTerms;
 import com.example.prototipo.models.State;
 import com.example.prototipo.records.OpportunitiesPNCP;
+import com.example.prototipo.repository.CustomerRepository;
 import com.example.prototipo.repository.ProcurementRepository;
 import com.example.prototipo.repository.SearchTermsRepository;
 import com.example.prototipo.repository.StateRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Component
 public class SchedulerWorker {
@@ -23,48 +23,68 @@ public class SchedulerWorker {
     private final ProcurementRepository repository;
     private final StateRepository stateRepository;
     private final ProcurementService procurementService;
+    private final CustomerRepository customerRepository;
+    private final ReentrantLock lock = new ReentrantLock();
 
     public SchedulerWorker(
             SearchTermsRepository searchTermsRepository,
             ProcurementRepository repository,
             StateRepository stateRepository,
-            ProcurementService procurementService
+            ProcurementService procurementService,
+            CustomerRepository customerRepository
     ) {
         this.searchTermsRepository = searchTermsRepository;
         this.repository = repository;
         this.stateRepository = stateRepository;
         this.procurementService = procurementService;
+        this.customerRepository = customerRepository;
     }
 
-//    @Scheduled(fixedDelay = 180000)
-    @Transactional
-    public void customerSearchTerms(){
-        List<SearchTerms> terms = searchTermsRepository.findAll();
+    @Scheduled(cron = "0 0 8 * * *")
+    @Async
+    public void customersSearch(){
+        if(!lock.tryLock()){
+            throw new BusinessException("A busca já esta sendo realizada");
+        }
 
-        for (SearchTerms term : terms) {
-            List<OpportunitiesPNCP> procurements = dailySearch(term).stream()
-                    .filter(p -> !term.getCustomer().getDiscardsPncpId().contains(p.numero_controle_pncp()))
-                    .toList();
+        try{
+            List<SearchTerms> terms = searchTermsRepository.findAllWithState();
 
-            for (OpportunitiesPNCP procurement : procurements) {
+            for (SearchTerms term : terms) {
+                Set<String> discards = customerRepository.findDiscardsByCustomerId(term.getCustomer().getId());
 
-                if(repository.existsByCustomer_IdAndPncpId(term.getCustomer().getId(), procurement.numero_controle_pncp())){
-                    continue;
-                }
+                List<OpportunitiesPNCP> procurements = dailySearch(term).stream()
+                        .filter(p -> !discards.contains(p.numero_controle_pncp()))
+                        .toList();
 
-                Optional<State> state = stateRepository.findByUf(procurement.uf());
+                System.out.println(procurements);
 
-                if(state.isEmpty()){
-                    continue;
-                }
+                for (OpportunitiesPNCP procurement : procurements) {
 
-                Procurement newProcurement = new Procurement(term.getCustomer(), procurement, state.get());
+                    if(repository.existsByCustomer_IdAndPncpId(term.getCustomer().getId(), procurement.numero_controle_pncp())){
+                        continue;
+                    }
 
-                if(procurementService.getLink(newProcurement)){
-                    repository.save(newProcurement);
+                    Optional<State> state = stateRepository.findByUf(procurement.uf());
+
+                    if(state.isEmpty()){
+                        continue;
+                    }
+
+                    Procurement newProcurement = new Procurement(term.getCustomer(), procurement, state.get());
+
+                    if(procurementService.getLink(newProcurement)){
+                        procurementService.save(newProcurement);
+                    }
                 }
             }
+        } finally {
+            lock.unlock();
         }
+    }
+
+    public boolean isLocked(){
+        return lock.isLocked();
     }
 
     private List<OpportunitiesPNCP> dailySearch(SearchTerms term){
