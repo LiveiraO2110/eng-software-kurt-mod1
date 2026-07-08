@@ -10,7 +10,7 @@ export class CustomerService {
         return response.data
     }
 
-    getById = async (id: number): Promise<CustomerDTO> => {
+    getById = async (id: string): Promise<CustomerDTO> => {
         const response = await api.get(`/customers/${id}`);
         return response.data
     }
@@ -26,8 +26,8 @@ export class CustomerService {
         return response.data
     }
 
-    getAllProcurementByCustomer = async (customerId: number, discard: boolean): Promise<ProcurementsDTO[]> => {
-        const response = await api.get(`/customers/${customerId}/procurements`, {params: {discard: discard}});
+    getAllProcurementByCustomer = async (customerId: number | string, discard?: boolean): Promise<ProcurementsDTO[]> => {
+        const response = await api.get(`/customers/${customerId}/procurements`, {params: {discard: discard ? discard : false}});
         return response.data
     }
 

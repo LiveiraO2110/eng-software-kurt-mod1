@@ -1,0 +1,290 @@
+/* Layout Base */
+.customer_container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8fafc;
+    min-height: 100vh;
+}
+
+/* Header */
+.customer_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 16px;
+}
+
+.customer_title_zone h2 {
+    font-size: 26px;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.badge_id {
+    background-color: #e2e8f0;
+    color: #475569;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.btn_back {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn_back:hover {
+    background-color: #f1f5f9;
+}
+
+/* Distribuição Dashboard */
+.customer_dashboard_layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+@media (max-width: 992px) {
+    .customer_dashboard_layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Sidebar e Estrutura Comum de Cards */
+.dashboard_sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.customer_card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.customer_card h3 {
+    font-size: 15px;
+    color: #475569;
+    font-weight: 600;
+}
+
+.card_header_action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+/* Sidebar - Métricas e Termos */
+.metric_card {
+    text-align: center;
+}
+
+.metric_value {
+    font-size: 54px;
+    font-weight: 800;
+    color: #4f46e5;
+    margin: 10px 0;
+}
+
+.metric_subtitle {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.btn_add_term {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.terms_tags_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.term_tag {
+    background-color: #f5f3ff;
+    border: 1px solid #ddd6fe;
+    color: #5b21b6;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn_delete_term {
+    background: none;
+    border: none;
+    color: #c084fc;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn_delete_term:hover {
+    color: #ef4444;
+}
+
+/* Seção de Editais (Procurements) */
+.procurements_list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.procurement_item {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fafafa;
+    transition: box-shadow 0.2s;
+}
+
+.procurement_item:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    background-color: #ffffff;
+}
+
+.procurement_item_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    gap: 16px;
+}
+
+.procurement_modalidade {
+    background-color: #ccfbf1;
+    color: #115e59;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.procurement_orgao {
+    font-size: 16px;
+    color: #1e293b;
+    margin: 6px 0 2px 0;
+    font-weight: 600;
+}
+
+.procurement_cnpj {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.procurement_location {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    background-color: #f1f5f9;
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.procurement_description {
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+/* Grid Interno do Edital */
+.procurement_meta_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    background-color: #ffffff;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 16px;
+}
+
+.meta_info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.meta_label {
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.meta_value {
+    font-size: 13px;
+    color: #0f172a;
+    font-weight: 500;
+}
+
+.code_style {
+    font-family: monospace;
+    color: #475569;
+}
+
+.date_open {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+.date_close {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+/* Rodapé do item */
+.procurement_item_footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn_view_procurement {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4f46e5;
+    text-decoration: none;
+    border: 1px solid #4f46e5;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.btn_view_procurement:hover {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.empty_message {
+    color: #94a3b8;
+    font-size: 14px;
+    font-style: italic;
+}

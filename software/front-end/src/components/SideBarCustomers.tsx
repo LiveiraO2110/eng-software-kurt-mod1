@@ -15,7 +15,7 @@ export const SideBarCustomers = () => {
     return (
         <div className="barra-lateral-customers">
             {customers.slice(0, 5)?.map((c) => (
-                <div key={c.id} className="barra-lateral-customers-item" onClick={() => navigate(ROUTES.CUSTOMER_DETAILS.replace(":id", String(c.id)))}>
+                <div key={c.id} className="barra-lateral-customers-item" onClick={() => navigate(ROUTES.CUSTOMER_DETAILS.replace(":id", c.id.toString()))}>
                     <h4 className="customer-name">{c.name}</h4>
                     <span className="customer-badge">
                         Nº editais: <strong>{c.procurements}</strong>  
