@@ -1,33 +1,23 @@
 {
-  "name": "front-projeto-1",
+  "name": "motor-de-busca-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc -b && vite build",
-    "lint": "oxlint",
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.18.1",
-    "jwt-decode": "^4.0.0",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "react-router": "^7.18.0",
-    "react-toastify": "^11.1.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.7",
-    "@rolldown/plugin-babel": "^0.2.3",
-    "@types/babel__core": "^7.20.5",
-    "@types/node": "^24.13.2",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.2",
-    "babel-plugin-react-compiler": "^1.0.0",
-    "oxlint": "^1.69.0",
-    "typescript": "~6.0.2",
-    "vite": "^8.1.0"
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.2",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
   }
 }
