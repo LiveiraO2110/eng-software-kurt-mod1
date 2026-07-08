@@ -279,7 +279,7 @@ POST | localhost:8080/customers/search-terms
   "terms": [
     {
       "term": "ferragem",
-      "states": ["RS"] 
+      "states": [20] 
     }
   ]
 }
