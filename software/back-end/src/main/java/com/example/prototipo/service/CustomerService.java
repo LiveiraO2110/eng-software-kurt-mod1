@@ -27,6 +27,11 @@ public class CustomerService {
         return repository.findAll();
     }
 
+    public Customer getById(Long id){
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
+    }
+
     public List<Procurement> getProcurement(Long customerId){
         if(!repository.existsById(customerId)){
             throw new EntityNotFoundException("Cliente com id "+customerId+" não encontrado");

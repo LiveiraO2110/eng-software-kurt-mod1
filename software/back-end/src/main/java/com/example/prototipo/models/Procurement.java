@@ -19,7 +19,7 @@ import java.util.Set;
 })
 @Getter
 @Setter
-public class Procurement {
+public class Procurement implements Comparable<Procurement>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -115,5 +115,15 @@ public class Procurement {
 
         this.docs.add(docs);
         docs.setProcurement(this);
+    }
+
+
+    @Override
+    public int compareTo(Procurement procurement) {
+        if(this.updateDate == null && procurement.updateDate == null) return 0;
+        if(procurement.updateDate == null) return 1;
+        if(this.updateDate == null) return -1;
+
+        return procurement.updateDate.compareTo(this.updateDate);
     }
 }

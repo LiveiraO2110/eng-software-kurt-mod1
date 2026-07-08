@@ -30,6 +30,11 @@ public class ControllerCustomer {
         return service.getAll().stream().map(CustomerDTO::new).toList();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<CustomerDTO> getById(@PathVariable("id") Long id){
+        return ResponseEntity.ok(new CustomerDTO(service.getById(id)));
+    }
+
     @PostMapping
     public ResponseEntity<CustomerDTO> createCustomer(
             @Valid @RequestBody CustomerRequest customer
@@ -52,9 +57,9 @@ public class ControllerCustomer {
             @RequestParam(value = "discard", defaultValue = "false") boolean discard
     ){
         if(discard){
-            return service.getOnlyProcurementDiscard(id).stream().map(ProcurementDTO::new).toList();
+            return service.getOnlyProcurementDiscard(id).stream().sorted().map(ProcurementDTO::new).toList();
         }
-        return service.getProcurement(id).stream().map(ProcurementDTO::new).toList();
+        return service.getProcurement(id).stream().sorted().map(ProcurementDTO::new).toList();
     }
 
     @DeleteMapping("/{id}/procurements")

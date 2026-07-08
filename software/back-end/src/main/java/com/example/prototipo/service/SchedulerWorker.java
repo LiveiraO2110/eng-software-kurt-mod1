@@ -57,8 +57,6 @@ public class SchedulerWorker {
                         .filter(p -> !discards.contains(p.numero_controle_pncp()))
                         .toList();
 
-                System.out.println(procurements);
-
                 for (OpportunitiesPNCP procurement : procurements) {
 
                     if(repository.existsByCustomer_IdAndPncpId(term.getCustomer().getId(), procurement.numero_controle_pncp())){
