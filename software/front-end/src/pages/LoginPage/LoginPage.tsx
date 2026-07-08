@@ -62,6 +62,9 @@ export function LoginPage() {
                     <button type="button" onClick={handleLogin}>
                         Entrar
                     </button>
+                    <div className="register_footer">
+                        <p>Não tem uma conta? <a href={ROUTES.REGISTER_CLIENTE}>Cadastre-se</a></p>
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import { api } from "../api";
 import type { UserDTO } from "../dtos/DTOS";
+import type { UserRequest } from "../types/UserRequest";
 
 interface ResponseAuthLogin {
     token: string
@@ -23,5 +24,10 @@ export class AuthServices {
         const response = await api.post("/auth/login", body)
         const token: ResponseAuthLogin = response.data
         return token.token
+    }
+
+    register = async (request: UserRequest): Promise<UserDTO> => {
+        const response = await api.post("/auth/register", request)
+        return response.data
     }
 }

@@ -3,5 +3,5 @@ export const ROUTES = {
     HOMEPAGE: "/home",
     PROCUREMENTS_DETAILS: "/editais/:id",
     CUSTOMER_DETAILS: "/clientes/:id",
-    REGISTER_CLIENTE: "/register/cliente"
+    REGISTER_CLIENTE: "/register"
 }

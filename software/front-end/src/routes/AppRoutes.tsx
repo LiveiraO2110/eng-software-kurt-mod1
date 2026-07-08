@@ -14,10 +14,11 @@ export function AppRoutes(){
                     <Route element={<AuthContextGuard/>}>
                         
                         <Route path={ROUTES.HOMEPAGE} element={<HomePage/>}/>
-                        <Route path={ROUTES.REGISTER_CLIENTE} element={<ClientRegisterPage/>}/>
                     </Route>
                     
                     <Route path={ROUTES.LOGIN} element={<LoginPage/>}/>
+                    <Route path={ROUTES.REGISTER_CLIENTE} element={<ClientRegisterPage/>}/>
+
                     <Route path="*" element={<Navigate to={ROUTES.HOMEPAGE}/>}/>
                 </Routes>
             </BrowserRouter>
