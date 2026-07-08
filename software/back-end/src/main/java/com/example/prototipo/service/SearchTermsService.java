@@ -48,9 +48,9 @@ public class SearchTermsService {
 
             SearchTerms searchTerm = new SearchTerms(customer, term.term());
 
-            if(!term.statesId().isEmpty()){
-                for (Long id : term.statesId()) {
-                    State state = stateRepository.findById(id)
+            if(!term.states().isEmpty()){
+                for (String uf : term.states()) {
+                    State state = stateRepository.findByUf(uf)
                             .orElseThrow(() -> new EntityNotFoundException("Estado não encontrado"));
                     searchTerm.addState(state);
                 }

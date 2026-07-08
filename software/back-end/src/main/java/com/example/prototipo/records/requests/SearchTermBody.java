@@ -7,6 +7,6 @@ import java.util.Set;
 
 public record SearchTermBody(
         @NotBlank(message = "Termo não pode ser nulo ou vazio") String term,
-        @NotNull(message = "Array do estados não pode ser nulo") Set<Long> statesId
+        @NotNull(message = "Array do estados não pode ser nulo") Set<String> states
 ) {
 }
