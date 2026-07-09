@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { PageHeader } from "../components/AppLayout"
 import { Loading, ErrorMessage, EmptyState } from "../components/Feedback"
 import { ProcurementTable } from "../components/ProcurementTable"
@@ -13,6 +13,11 @@ export function ProcurementsPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [deleting, setDeleting] = useState(false)
+
+  // PNCP search engine
+  const [searchRunning, setSearchRunning] = useState(false)
+  const [searchNotice, setSearchNotice] = useState<string | null>(null)
+  const pollRef = useRef<number | null>(null)
 
   // filters
   const [filterOpen, setFilterOpen] = useState(false)
@@ -44,6 +49,49 @@ export function ProcurementsPage() {
   useEffect(() => {
     loadAll()
   }, [loadAll])
+
+  // Poll the PNCP search engine status; reload editais when a run finishes.
+  const checkSearchStatus = useCallback(async () => {
+    try {
+      const running = await api.getSearchEngineStatus()
+      setSearchRunning((wasRunning) => {
+        if (wasRunning && !running) {
+          setSearchNotice("Busca concluída. Editais atualizados.")
+          loadAll()
+        }
+        return running
+      })
+    } catch {
+      /* silencioso: status é secundário */
+    }
+  }, [loadAll])
+
+  useEffect(() => {
+    checkSearchStatus()
+    pollRef.current = window.setInterval(checkSearchStatus, 5000)
+    return () => {
+      if (pollRef.current) window.clearInterval(pollRef.current)
+    }
+  }, [checkSearchStatus])
+
+  async function handleStartSearch() {
+    setSearchNotice(null)
+    setError(null)
+    try {
+      const res = await api.startSearch()
+      setSearchRunning(true)
+      setSearchNotice(res.message || "Busca iniciada.")
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 409) {
+        setSearchRunning(true)
+        setSearchNotice(err.message || "A busca já está sendo realizada.")
+      } else {
+        setError(
+          err instanceof ApiError ? err.message : "Erro ao iniciar a busca.",
+        )
+      }
+    }
+  }
 
   async function handleSearch(e: React.FormEvent) {
     e.preventDefault()
@@ -120,6 +168,19 @@ export function ProcurementsPage() {
         action={
           <div style={{ display: "flex", gap: "0.75rem" }}>
             <button
+              className="btn btn-primary"
+              onClick={handleStartSearch}
+              disabled={searchRunning}
+            >
+              {searchRunning ? (
+                <>
+                  <span className="spinner" aria-hidden /> Buscando...
+                </>
+              ) : (
+                "Buscar no PNCP"
+              )}
+            </button>
+            <button
               className="btn btn-outline"
               onClick={() => setFilterOpen((v) => !v)}
             >
@@ -139,6 +200,17 @@ export function ProcurementsPage() {
           </div>
         }
       />
+
+      {(searchRunning || searchNotice) && (
+        <div className="notice" style={{ marginBottom: "1.5rem" }}>
+          {searchRunning && <span className="spinner" aria-hidden />}
+          <span>
+            {searchRunning
+              ? searchNotice || "Busca em andamento no PNCP..."
+              : searchNotice}
+          </span>
+        </div>
+      )}
 
       {filterOpen && (
         <form

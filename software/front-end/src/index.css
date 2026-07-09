@@ -212,6 +212,40 @@ select {
   font-size: 0.8rem;
   font-weight: 600;
 }
+.chip-removable {
+  padding-right: 0.3rem;
+}
+.chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--primary);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.chip-remove:hover {
+  background: #dbeafe;
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  color: var(--primary);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
 
 /* ---------- Utilities ---------- */
 .muted {

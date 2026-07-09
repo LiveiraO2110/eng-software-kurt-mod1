@@ -77,6 +77,21 @@ export function CustomerDetailPage() {
     )
   }
 
+  async function handleDeleteTerm(termId: number) {
+    const prev = terms
+    // optimistic update
+    setTerms((t) => t.filter((x) => x.id !== termId))
+    setTermError(null)
+    try {
+      await api.deleteSearchTerm(customerId, termId)
+    } catch (err) {
+      setTerms(prev) // rollback
+      setTermError(
+        err instanceof ApiError ? err.message : "Erro ao remover o termo.",
+      )
+    }
+  }
+
   async function handleStatusChange(
     procurementId: number,
     status: Procurement["status"],
@@ -126,8 +141,17 @@ export function CustomerDetailPage() {
             }}
           >
             {terms.map((t) => (
-              <span key={t.id} className="chip">
+              <span key={t.id} className="chip chip-removable">
                 {t.term}
+                <button
+                  type="button"
+                  className="chip-remove"
+                  onClick={() => handleDeleteTerm(t.id)}
+                  aria-label={`Remover termo ${t.term}`}
+                  title="Remover termo"
+                >
+                  &times;
+                </button>
               </span>
             ))}
           </div>

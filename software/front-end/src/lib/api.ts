@@ -131,6 +131,16 @@ export function getSearchTerms(customerId: number): Promise<SearchTerm[]> {
   return request<SearchTerm[]>(`/customers/${customerId}/search-terms`)
 }
 
+export function deleteSearchTerm(
+  customerId: number,
+  searchTermId: number,
+): Promise<void> {
+  return request<void>(
+    `/customers/${customerId}/search-terms/${searchTermId}`,
+    { method: "DELETE" },
+  )
+}
+
 /* ---------- Procurements ---------- */
 export function getCustomerProcurements(
   customerId: number,
@@ -167,4 +177,13 @@ export function updateProcurementStatus(
 
 export function deleteDiscarded(): Promise<void> {
   return request<void>("/procurements", { method: "DELETE" })
+}
+
+/* ---------- PNCP search engine ---------- */
+export function startSearch(): Promise<{ status: string; message: string }> {
+  return request<{ status: string; message: string }>("/search")
+}
+
+export function getSearchEngineStatus(): Promise<boolean> {
+  return request<boolean>("/search/status")
 }

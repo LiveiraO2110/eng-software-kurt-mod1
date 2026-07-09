@@ -586,3 +586,26 @@ GET | localhost:8080/search/status
 Status: 200
 
 true
+
+------------------------------------------------------------------------
+
+# DELETE `/customers/{customerId}/search-terms/{search_termId}`
+
+**Descrição:** Delete termos de busca para um cliente.
+
+
+### Parâmetros
+
+  Nome            Tipo   Obrigatório   Descrição
+  ------------    ------ ------------- ---------------
+  customerId      Long    Sim           ID do cliente
+  search-termId   Long    Sim           ID do termo de busca
+
+### Exemplo de Requisição
+
+DELETE | localhost:8080/customers/{customerId}/search-terms/{search_termId}
+
+``` json
+[]
+```
+
