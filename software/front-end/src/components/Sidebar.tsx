@@ -94,19 +94,6 @@ export function Sidebar() {
         <NavLink to="/clientes/novo" style={linkStyle}>
           Cadastrar Cliente
         </NavLink>
-
-        <p
-          style={{
-            fontSize: "0.72rem",
-            letterSpacing: "0.08em",
-            color: "var(--sidebar-heading)",
-            textTransform: "uppercase",
-            fontWeight: 700,
-            margin: "1rem 0 0.5rem 0.75rem",
-          }}
-        >
-          Seus Clientes
-        </p>
         <NavLink to="/clientes" end style={linkStyle}>
           Lista de Clientes
         </NavLink>
