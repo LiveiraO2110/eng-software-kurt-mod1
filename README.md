@@ -52,6 +52,7 @@ Este repositório será utilizado para versionamento da documentação técnica 
 | `docs/especificacao/contratos-de-interface` | Contratos de Interace |
 | `docs/especificacao/diagrama-de-classes` | Diagrama de Classes |
 | `docs/especificacao/diagrama-de-sequencia` | Diagrama de Sequência |
+| `software` | Aplicação Spring + React |
 
 ---
 
@@ -113,4 +114,4 @@ Este projeto tem como objetivo aplicar conceitos de:
 
 ## 📌 Status do Projeto
 
-🚧 Em desenvolvimento
+✅ Concluído
