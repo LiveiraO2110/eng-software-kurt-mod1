@@ -41,7 +41,7 @@ public class SchedulerWorker {
         this.customerRepository = customerRepository;
     }
 
-    @Scheduled(cron = "0 0 8 * * *")
+    @Scheduled(cron = "0 0 * * * *")
     @Async
     @Transactional
     public void customersSearch(){

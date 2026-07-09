@@ -8,7 +8,7 @@
 O **Motor de Busca** é uma API desenvolvida para se integrar com a API do **Portal Nacional de Contratações Públicas (PNCP)**. O sistema automatiza a recolha de editais e licitações com base nos termos de interesse configurados para cada cliente, disponibilizando os dados consolidados através de endpoints `GET`.
 
 ## 🚀 Funcionalidades
-* 🔍 **Busca Automatizada:** Integração contínua e filtragem de dados diretamente da API do PNCP. Busca programada para executar as 8 horas da manhã, ao rodar a aplicação a busca é executada com os dados cadastrados.
+* 🔍 **Busca Automatizada:** Integração contínua e filtragem de dados diretamente da API do PNCP. Busca programada para executar a cada hora.
 * 👥 **Filtros por Cliente:** Gestão e parametrização de termos específicos customizados por utilizador/cliente.
 * ⚡ **Disponibilização de Dados:** Endpoints REST otimizados para consumo rápido dos dados filtrados.
 
