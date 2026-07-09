@@ -31,8 +31,8 @@ public interface ProcurementRepository extends JpaRepository<Procurement, Long> 
     @Query("SELECT p FROM Procurement p " +
             "WHERE p.updateDate = :date " +
             "AND (:customerId IS NULL OR p.customer.id = :customerId) " +
-            "AND (:uf IS NULL OR lower(p.state.uf) = lower(:uf)) " +
-            "AND (:pncpId IS NULL OR p.pncpId LIKE CONCAT('%', :pncpId, '%')) " +
+            "AND (CAST(:uf AS text) IS NULL OR lower(p.state.uf) = lower(CAST(:uf AS text))) " +
+            "AND (CAST(:pncpId AS text) IS NULL OR p.pncpId LIKE CONCAT('%', CAST(:pncpId AS text), '%')) " +
             "AND p.status <> 'DESCARTADO'")
     List<Procurement> searchProcurements(
             @Param("date") LocalDate date,
