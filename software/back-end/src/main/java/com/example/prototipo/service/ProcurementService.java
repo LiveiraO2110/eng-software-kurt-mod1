@@ -70,26 +70,25 @@ public class ProcurementService {
         return repository.searchProcurements(date, customerId, uf, pncpId);
     }
 
-    @Transactional
-    public void save(Procurement procurement){
+    public boolean save(Procurement procurement){
         try{
             if(procurement.getCustomer() != null){
                 Set<String> discards = procurement.getCustomer().getDiscardsPncpId();
 
                 if (discards == null || !discards.contains(procurement.getPncpId())){
                     repository.save(procurement);
+                    return true;
                 }
             }
         } catch (Exception exception){
-            return;
+            System.out.println(exception.getMessage());
+            return false;
         }
+
+        return false;
     }
 
     public List<OpportunitiesPNCP> searchByPage(String q, String ufs, int page){
-        System.out.println("Fazendo requisição: "+q);
-        System.out.println(q);
-        System.out.println(ufs);
-
         try{
             DailyResponse response = restClient
                     .get()
@@ -125,7 +124,7 @@ public class ProcurementService {
         }
     }
 
-    public boolean getLink(Procurement procurement){
+    public void getLink(Procurement procurement){
         String path = "/api/pncp/v1/orgaos/"+procurement.getCnpj()+"/compras/2026/"+procurement.getNumeroSequencial()+"/arquivos";
 
         ParameterizedTypeReference<List<File>> typeReference =
@@ -154,22 +153,18 @@ public class ProcurementService {
                      if(!f.url().isBlank()){
                          Docs docs = new Docs(f.url());
                          procurement.addDoc(docs);
-                         docsRepository.save(docs);
+                         if(save(procurement)){
+                             docsRepository.save(docs);
+                         }
                      }
                  });
-                 return true;
              }
-
-             return false;
         } catch (RestClientResponseException ex) {
             System.err.println("Erro na requisição: Status " + ex.getStatusCode() + " - " + ex.getResponseBodyAsString());
-            return false;
         }catch (ResourceAccessException ex) {
             System.err.println("Timeout ou erro de rede ao conectar à API do PNCP: " + ex.getMessage());
-            return false;
         } catch (Exception ex) {
             System.err.println("Error: " + ex.getMessage());
-            return false;
         }
     }
 

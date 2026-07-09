@@ -9,6 +9,7 @@ import com.example.prototipo.repository.CustomerRepository;
 import com.example.prototipo.repository.ProcurementRepository;
 import com.example.prototipo.repository.SearchTermsRepository;
 import com.example.prototipo.repository.StateRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -42,6 +43,7 @@ public class SchedulerWorker {
 
     @Scheduled(cron = "0 0 8 * * *")
     @Async
+    @Transactional
     public void customersSearch(){
         if(!lock.tryLock()){
             throw new BusinessException("A busca já esta sendo realizada");
@@ -71,9 +73,7 @@ public class SchedulerWorker {
 
                     Procurement newProcurement = new Procurement(term.getCustomer(), procurement, state.get());
 
-                    if(procurementService.getLink(newProcurement)){
-                        procurementService.save(newProcurement);
-                    }
+                    procurementService.getLink(newProcurement);
                 }
             }
         } finally {
