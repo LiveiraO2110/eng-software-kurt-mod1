@@ -1,7 +1,7 @@
 # Motor de Busca
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Status-Em%20Desenvolvimento-orange?style=for-the-badge" alt="Status: Em Desenvolvimento">
+<p align="center">  
+  <img src="https://img.shields.io/badge/Status-Conclu%C3%ADdo-green?style=for-the-badge" alt="Status: Concluído">
 </p>
 
 ## 📖 Descrição
